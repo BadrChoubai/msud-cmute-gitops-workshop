@@ -35,6 +35,15 @@ Two things happen:
 1. **CI rebuilds your image** with the Prometheus exporter plugin baked in.
 2. **ArgoCD syncs** the updated deployment and service to your cluster.
 
+## Wait for the new image
+
+1. Go to the **Actions** tab and wait for the build to complete.
+2. Force your cluster to pull the new image:
+
+```bash
+kubectl rollout restart deployment paper -n paper
+```
+
 ## Verify it works
 
 Once the new pod is running:

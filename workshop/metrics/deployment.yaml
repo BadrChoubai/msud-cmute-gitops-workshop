@@ -21,6 +21,11 @@ spec:
       containers:
         - name: paper
           image: ghcr.io/<YOUR_GITHUB_USERNAME>/msud-cmute-gitops-workshop:latest
+          env:
+            - name: MINECRAFT_PROMETHEUS_EXPORTER_HOST
+              value: "0.0.0.0"
+            - name: MINECRAFT_PROMETHEUS_EXPORTER_PORT
+              value: "9940"
           ports:
             - containerPort: 25565
             - containerPort: 9940
