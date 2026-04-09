@@ -211,39 +211,19 @@ kubectl get pods -n paper
 
 ### Expose the server
 
-1. Get your Gateway's external IP:
+1. Get your Gateway's external IP (used for ArgoCD):
 
 ```bash
 kubectl get gateway paper-gateway -n paper
 ```
 
-1. Get your Gateway's external IP:
+2. Get your Minecraft service IP:
 
 ```bash
-kubectl get gateway paper-gateway -n paper
+kubectl get svc paper -n paper
 ```
 
-2. Create your DNS record:
-
-```bash
-doctl compute domain records create cmute.cloud \
-  --record-type A \
-  --record-name "<YOUR_NAME>.mc.labs" \
-  --record-data <GATEWAY_EXTERNAL_IP> \
-  --record-ttl 300
-```
-
-Example:
-
-```bash
-doctl compute domain records create cmute.cloud \
-  --record-type A \
-  --record-name "test.mc.labs" \
-  --record-data 143.198.1.50 \
-  --record-ttl 300
-```
-
-3. Create a second A record for ArgoCD pointing at the same Gateway IP:
+3. Create a DNS record for ArgoCD pointing to the **Gateway IP**:
 
 ```bash
 doctl compute domain records create cmute.cloud \
@@ -259,7 +239,7 @@ doctl compute domain records create cmute.cloud \
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
 
-3. Connect with your Minecraft client to `<YOUR_NAME>.mc.labs.cmute.cloud`.
+5. Connect with your Minecraft client to the Minecraft service IP from step 2.
 
 ### Test GitOps
 
