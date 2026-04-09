@@ -11,8 +11,6 @@ spec:
       allowedRoutes:
         namespaces:
           from: Same
-    # Replace <YOUR_NAME> with your name (lowercase, no spaces).
-    # This listener terminates TLS for ArgoCD; the HTTPRoute lives in the argocd namespace.
     - name: argocd-https
       protocol: HTTPS
       port: 443
@@ -21,6 +19,17 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: argocd-tls
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: grafana-https
+      protocol: HTTPS
+      port: 443
+      hostname: grafana.test.mc.labs.cmute.cloud
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: grafana-tls
       allowedRoutes:
         namespaces:
           from: All

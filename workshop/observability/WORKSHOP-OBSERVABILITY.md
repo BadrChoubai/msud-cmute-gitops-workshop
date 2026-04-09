@@ -82,10 +82,10 @@ kubectl get gateway paper-gateway -n paper
 ```
 
 ```bash
-doctl compute domain records create labs.cmute.cloud \
+doctl compute domain records create cmute.cloud \
   --record-type A \
-  --record-name "grafana.<YOUR_NAME>.mc" \
-  --record-data <SAME_GATEWAY_IP> \
+  --record-name "grafana.<YOUR_NAME>.mc.labs" \
+  --record-data <GATEWAY_EXTERNAL_IP> \
   --record-ttl 300
 ```
 
