@@ -7,6 +7,7 @@ resources:
   - namespace.yaml
   - configmap.yaml
   - persistentvolumeclaim.yaml
+  - prometheus-exporter-config.yaml
   - deployment.yaml
   - service.yaml
   - gateway.yaml
