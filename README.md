@@ -247,15 +247,17 @@ Make a change and watch ArgoCD sync it automatically.
 
 1. Edit `k8s/configmap.yaml`. Change `max-players` to `50`.
 
-2. Commit and push.
+2. Edit `k8s/deployment.yaml`. Change the `configmap-hash` annotation to any new value (ex: `"2"`). This triggers a pod restart so Minecraft picks up the new config.
 
-3. Watch the sync:
+3. Commit and push.
+
+4. Watch the sync:
 
 ```bash
-kubectl get configmap paper-config -n paper -o yaml
+kubectl get pods -n paper
 ```
 
-ArgoCD will detect the change in your repo and apply it to the cluster automatically.
+ArgoCD will detect the changes and roll out a new pod automatically.
 
 ## Cleanup
 
