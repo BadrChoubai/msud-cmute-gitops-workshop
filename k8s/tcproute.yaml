@@ -5,6 +5,7 @@ metadata:
 spec:
   parentRefs:
     - name: paper-gateway
+      sectionName: minecraft
   rules:
     - backendRefs:
         - name: paper

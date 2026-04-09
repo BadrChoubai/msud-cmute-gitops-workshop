@@ -96,7 +96,7 @@ default-1x8h9   Ready    <none>   2m59s   v1.35.1
 
 ```bash
 kubectl apply --server-side --force-conflicts \
-  -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.1/standard-install.yaml
+  -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.1/experimental-install.yaml
 ```
 
 You should see:
@@ -116,6 +116,10 @@ helm install eg oci://docker.io/envoyproxy/gateway-helm \
   -n envoy-gateway-system \
   --create-namespace \
   --skip-crds
+```
+
+```bash
+kubectl apply -f infra/envoy-gateway/gatewayclass.yaml
 ```
 
 2. Install cert-manager:
@@ -210,15 +214,21 @@ kubectl get pods -n paper
 1. Get your Gateway's external IP:
 
 ```bash
-kubectl get gateway -n paper
+kubectl get gateway paper-gateway -n paper
+```
+
+1. Get your Gateway's external IP:
+
+```bash
+kubectl get gateway paper-gateway -n paper
 ```
 
 2. Create your DNS record:
 
 ```bash
-doctl compute domain records create labs.cmute.cloud \
+doctl compute domain records create cmute.cloud \
   --record-type A \
-  --record-name "<YOUR_NAME>.mc" \
+  --record-name "<YOUR_NAME>.mc.labs" \
   --record-data <GATEWAY_EXTERNAL_IP> \
   --record-ttl 300
 ```
@@ -226,9 +236,9 @@ doctl compute domain records create labs.cmute.cloud \
 Example:
 
 ```bash
-doctl compute domain records create labs.cmute.cloud \
+doctl compute domain records create cmute.cloud \
   --record-type A \
-  --record-name "alice.mc" \
+  --record-name "test.mc.labs" \
   --record-data 143.198.1.50 \
   --record-ttl 300
 ```
@@ -236,9 +246,9 @@ doctl compute domain records create labs.cmute.cloud \
 3. Create a second A record for ArgoCD pointing at the same Gateway IP:
 
 ```bash
-doctl compute domain records create labs.cmute.cloud \
+doctl compute domain records create cmute.cloud \
   --record-type A \
-  --record-name "argocd.<YOUR_NAME>.mc" \
+  --record-name "argocd.<YOUR_NAME>.mc.labs" \
   --record-data <GATEWAY_EXTERNAL_IP> \
   --record-ttl 300
 ```
