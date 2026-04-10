@@ -36,7 +36,7 @@ The new workflow adds a `secret-scan` job that runs before the `build` job:
 ```
 
 - **`fetch-depth: 0`** clones the full git history so TruffleHog can scan every commit, not just the latest.
-- **`--only-verified`** reduces noise by only flagging secrets that are confirmed active against their service (e.g. a DigitalOcean token that actually authenticates).
+- **`--only-verified`** reduces noise by only flagging secrets that are confirmed active against their service (ex: a DigitalOcean token that actually authenticates).
 - **`needs: secret-scan`** on the build job means the image will not build or push if secrets are detected.
 
 ## Test it
@@ -57,6 +57,6 @@ git commit -m "oops"
 git push origin test-secret
 ```
 
-Open a pull request from `test-secret` into `main`. The `secret-scan` job will flag the token and the pipeline will fail. Delete the branch when you're done — don't merge it.
+Open a pull request from `test-secret` into `main`. The `secret-scan` job will flag the token and the pipeline will fail. Delete the branch when you're done. Don't merge it or do.
 
 > **Note:** The `--only-verified` flag means TruffleHog will only flag this if the token actually authenticates. For a guaranteed failure in a demo, you can temporarily remove `--only-verified` from the workflow, then add it back after.
