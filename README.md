@@ -1,9 +1,3 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="pics/tcc_logo_darkmode.png">
-  <source media="(prefers-color-scheme: light)" srcset="pics/tcc_logo.png">
-  <img alt="The Cybersecurity Center" src="pics/tcc_logo.png">
-</picture>
-
 # MSU Denver GitOps Workshop
 
 Deploy a PaperMC Minecraft server to DigitalOcean Kubernetes using GitOps principles.
