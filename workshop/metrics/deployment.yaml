@@ -14,7 +14,7 @@ spec:
       labels:
         app: paper
       annotations:
-        configmap-hash: "2"
+        configmap-hash: "4"
     spec:
       securityContext:
         fsGroup: 1000
